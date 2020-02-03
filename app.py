@@ -1,6 +1,8 @@
 from twitter import Twitter
 import time
 
+#testing push ke heroku
+
 tw = Twitter()
 
 def start():
