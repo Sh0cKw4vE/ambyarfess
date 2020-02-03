@@ -2,6 +2,7 @@ from twitter import Twitter
 import time
 
 #testing push ke heroku
+#fsfnjinajia
 
 tw = Twitter()
 
