@@ -45,6 +45,7 @@ class Twitter:
             return dms
 
         except Exception as ex:
+            print("Error read in here")
             print(ex)
             time.sleep(60)
             pass
@@ -60,8 +61,14 @@ class Twitter:
             pass
 
     def post_tweet(self, tweet):
-        self.api.update_status(tweet)
-        time.sleep(40)
+        try:
+            self.api.update_status(tweet)
+            time.sleep(40)
+        except Exception as ex:
+            print("Error Post in here")
+            print(ex)
+            time.sleep(40)
+            pass
 
     def post_tweet_with_media(self, tweet, media_url):
         print("Downloading media...")
