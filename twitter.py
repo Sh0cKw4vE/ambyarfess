@@ -71,23 +71,29 @@ class Twitter:
             pass
 
     def post_tweet_with_media(self, tweet, media_url):
-        print("Downloading media...")
-        arr = str(media_url).split('/')
-        auth = OAuth1(client_key=constants.CONSUMER_KEY,
-                      client_secret=constants.CONSUMER_SECRET,
-                      resource_owner_secret=constants.ACCESS_SECRET,
-                      resource_owner_key=constants.ACCESS_KEY)
+        try:
+            print("Downloading media...")
+            arr = str(media_url).split('/')
+            auth = OAuth1(client_key=constants.CONSUMER_KEY,
+                          client_secret=constants.CONSUMER_SECRET,
+                          resource_owner_secret=constants.ACCESS_SECRET,
+                          resource_owner_key=constants.ACCESS_KEY)
 
-        r = requests.get(media_url, auth = auth)
-        with open(arr[9], 'wb') as f:
-            f.write(r.content)
-        print("Media downloaded successfully!")
-        pattern = re.compile("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+")
-        #pattern.sub("", str(tweet))
-        #tweet = tweet.replace("https://", "")
-        #tweet=tweet.sub(r"http\S+", "", str(tweet))
-        tweet=pattern.sub('',tweet)
-        print(tweet)
-        self.api.update_with_media(filename= arr[9], status=tweet)
-        os.remove(arr[9])
-        print("Upload with media success")
+            r = requests.get(media_url, auth = auth)
+            with open(arr[9], 'wb') as f:
+                f.write(r.content)
+            print("Media downloaded successfully!")
+            pattern = re.compile("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+")
+            #pattern.sub("", str(tweet))
+            #tweet = tweet.replace("https://", "")
+            #tweet=tweet.sub(r"http\S+", "", str(tweet))
+            tweet=pattern.sub('',tweet)
+            print(tweet)
+            self.api.update_with_media(filename= arr[9], status=tweet)
+            os.remove(arr[9])
+            print("Upload with media success")
+        except Exception as ex:
+            print("Error Post w/ Media in here")
+            print(ex)
+            time.sleep(40)
+            pass
