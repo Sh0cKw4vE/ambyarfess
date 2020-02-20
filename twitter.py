@@ -60,7 +60,7 @@ class Twitter:
             time.sleep(40)
             pass
 
-    def post_tweet(self, tweet):
+    def post_tweet(self, tweet, id):
         try:
             self.api.update_status(tweet)
             time.sleep(40)
@@ -87,7 +87,10 @@ class Twitter:
             #pattern.sub("", str(tweet))
             #tweet = tweet.replace("https://", "")
             #tweet=tweet.sub(r"http\S+", "", str(tweet))
-            tweet=pattern.sub('',tweet)
+            mediasource = pattern.findall(tweet)
+            #tweet=pattern.sub('',tweet)
+            print(mediasource[len(mediasource)-1])
+            tweet = tweet.replace(mediasource[len(mediasource)-1], "")
             print(tweet)
             self.api.update_with_media(filename= arr[9], status=tweet)
             os.remove(arr[9])

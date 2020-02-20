@@ -2,7 +2,6 @@ from twitter import Twitter
 import time
 
 #testing push ke heroku
-#fsfnjinajia
 
 tw = Twitter()
 
@@ -26,6 +25,7 @@ def start():
                                 tw.delete_dm(id)
                             else:
                                 print("DM will be posted with media")
+                                print(dms[i]['media'])
                                 tw.post_tweet_with_media(message, dms[i]['media'])
                                 tw.delete_dm(id)
                         else:
